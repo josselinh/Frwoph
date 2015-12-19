@@ -17,7 +17,7 @@ I don't want to take a look on others framework or to be inspired by them.
         <IfModule mod_rewrite.c>
             Options -MultiViews
             RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-f
+            #RewriteCond %{REQUEST_FILENAME} !-f
             RewriteRule ^(.*)$ index.php [QSA,L]
         </IfModule>
     </Directory>
