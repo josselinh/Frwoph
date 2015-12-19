@@ -11,7 +11,15 @@ class FrwophRouter implements FrwophRouterInterface
 
     public function __construct(FrwophRouterConfig $routes)
     {
-        $requested = $_SERVER['REDIRECT_URL'];
+        if (!empty($_SERVER['REDIRECT_URL'])) {
+            $requested = $_SERVER['REDIRECT_URL'];
+        }
+
+        if (!empty($_SERVER['PATH_INFO'])) {
+            $requested = $_SERVER['PATH_INFO'];
+        }
+
+
         //pr($requested, 'requested');
         //pr($routes);
 
@@ -21,7 +29,7 @@ class FrwophRouter implements FrwophRouterInterface
 
             $routeRewritten = $route->getRoute();
             $pregMatches = array();
-            
+
 
             if (preg_match_all('#{(.*)}#Ui', $route->getRoute(), $pregMatches)) {
                 $routeRewritten = preg_replace('#{(.*)}#Ui', '(.*)', $route->getRoute());

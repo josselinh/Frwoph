@@ -39,17 +39,19 @@ class Bootstrap
         $this->configs[$name] = $value;
     }
 
-    public function addRoutesConfig($values)
-    {
-        $this->addConfig('routes', $values);
-    }
-
     public function execute()
     {
         $frwophRouter = new FrwophRouter($this->configs['routes']);
         echo 'Controller = ' . $frwophRouter->getController() . '<br />';
         echo 'Action = ' . $frwophRouter->getAction() . '<br />';
         echo 'Args = ' . print_r($frwophRouter->getArgs(), true) . '<br />';
+
+        $frwophDependencyInjection = new Vendors\FrwophDependencyInjection\FrwophDependencyInjection();
+        $frwophDependencyInjection->setConfig($this->configs['dependencies']);
+        $controller = $frwophDependencyInjection->instanciate('controller.' . $frwophRouter->getController());
+
+        $response = call_user_func_array(array($controller, $frwophRouter->getAction() . 'Action'), $frwophRouter->getArgs());
+        pr($response);
 
         echo 'execute successfully';
     }
