@@ -2,7 +2,7 @@
 
 namespace Frwoph;
 
-use Frwoph\Vendors\FrwophRouter\FrwophRouter;
+use Frwoph\Vendor\Frwoph\Router\Router;
 
 class Bootstrap
 {
@@ -41,7 +41,13 @@ class Bootstrap
 
     public function execute()
     {
-        $frwophRouter = new FrwophRouter($this->configs['routes']);
+        $router = new Router();
+        $router->setConfig($this->configs['routes']);
+        $router->dispatch();
+
+        echo $router->getName() . ' ' . $router->getController() . ' ' . $router->getAction() . ' ' . print_r($router->getArgs(), true);
+
+        exit;
 
         $frwophDependencyInjection = new Vendors\FrwophDependencyInjection\FrwophDependencyInjection();
         $frwophDependencyInjection->setConfig($this->configs['dependencies']);
