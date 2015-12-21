@@ -1,8 +1,8 @@
 <?php
 
-namespace Frwoph\Vendors\FrwophResponse;
+namespace Frwoph\Vendor\Frwoph\Response;
 
-class FrwophResponseHeader
+class ResponseHeader
 {
     private $statusCode;
     private $headers;

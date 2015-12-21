@@ -1,8 +1,8 @@
 <?php
 
-namespace Frwoph\Vendors\FrwophResponse;
+namespace Frwoph\Vendor\Frwoph\Response;
 
-class FrwophResponse implements FrwophResponseInterface
+class Response
 {
     /**
      *
@@ -14,13 +14,13 @@ class FrwophResponse implements FrwophResponseInterface
      *
      * @var Headers
      */
-    public $Headers;
+    public $Header;
 
     public function __construct($content = null, $statusCode = 200, $headers = array('Content-Type: text/html'))
     {
         $this->setContent($content);
 
-        $this->Headers = new FrwophResponseHeader($statusCode, $headers);
+        $this->Header = new ResponseHeader($statusCode, $headers);
     }
 
     public function setContent($content)
@@ -30,11 +30,7 @@ class FrwophResponse implements FrwophResponseInterface
         switch (gettype($content)) {
             case 'object':
                 switch (get_class($content)) {
-                    case 'Frwoph\Vendors\FrwophView\FrwophView':
-                        /**
-                         * @var $content Frwoph\Vendors\FrwophView\FrwophView
-                         */
-                        
+                    case 'Frwoph\Vendor\Frwoph\View\View':
                         $contents = $content->render();
                         break;
                 }

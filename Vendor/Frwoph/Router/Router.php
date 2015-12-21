@@ -2,7 +2,7 @@
 
 namespace Frwoph\Vendor\Frwoph\Router;
 
-use Exception;
+use Frwoph\Vendor\Frwoph\Exceptions\RouteNotFoundException;
 
 /**
  * Router
@@ -81,9 +81,9 @@ class Router implements RouterInterface
                 }
             }
         }
-        
+
         if (empty($this->name) || empty($this->controller) || empty($this->action)) {
-            throw new Exception(sprintf('Route "%s" is not found', $requestedPath));
+            throw new RouteNotFoundException();
         }
     }
 

@@ -1,9 +1,12 @@
 <?php
 
-namespace Frwoph\Vendors\FrwophView;
+namespace Frwoph\Vendor\Frwoph\View;
 
-class FrwophView implements FrwophViewInterface
+use Exception;
+
+class View
 {
+
     private $page;
     private $values;
     private $layout;
@@ -39,7 +42,7 @@ class FrwophView implements FrwophViewInterface
     {
         ob_start();
         $layout = APP_VIEWS . DS . 'Layouts' . DS . $this->layout . '.php';
-        
+
         if (file_exists($layout)) {
             $view = APP_VIEWS . DS . $this->page . '.php';
 
@@ -47,7 +50,7 @@ class FrwophView implements FrwophViewInterface
                 require_once $layout;
                 return ob_get_clean();
             } else {
-                throw new Exception('View not found');
+                throw new Exception('View '.$view.' not found');
             }
         } else {
             throw new Exception('Layout not found');
@@ -58,4 +61,5 @@ class FrwophView implements FrwophViewInterface
     {
         return $this->values[$name];
     }
+
 }

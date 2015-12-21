@@ -2,7 +2,11 @@
 
 namespace Frwoph;
 
+use Exception;
+use Frwoph\Vendor\Frwoph\Exceptions\RouteNotFoundException;
+use Frwoph\Vendor\Frwoph\Response\Response;
 use Frwoph\Vendor\Frwoph\Router\Router;
+use Frwoph\Vendor\Frwoph\View\View;
 
 class Bootstrap
 {
@@ -41,9 +45,19 @@ class Bootstrap
 
     public function execute()
     {
-        $router = new Router();
-        $router->setConfig($this->configs['routes']);
-        $router->dispatch();
+        try {
+            $router = new Router();
+            $router->setConfig($this->configs['routes']);
+            $router->dispatch();
+        } catch (RouteNotFoundException $routeNotFoundException) {
+            try {
+                $response = new Response(new View('Errors/404'), 404);
+                echo $response->render();
+            } catch (Exception $ex) {
+                pr(array($ex->getCode(), $ex->getFile(), $ex->getLine(), $ex->getMessage()));
+                die;
+            }
+        }
 
         echo $router->getName() . ' ' . $router->getController() . ' ' . $router->getAction() . ' ' . print_r($router->getArgs(), true);
 
