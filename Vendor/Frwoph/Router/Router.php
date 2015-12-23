@@ -2,8 +2,6 @@
 
 namespace Frwoph\Vendor\Frwoph\Router;
 
-use Frwoph\Vendor\Frwoph\Exceptions\RouteNotFoundException;
-
 /**
  * Router
  * @author Josselin

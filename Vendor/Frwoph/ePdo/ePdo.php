@@ -1,10 +1,10 @@
 <?php
 
-namespace Frwoph\Vendors\FrwophPdo;
+namespace Frwoph\Vendor\Frwoph\ePdo;
 
 use PDO;
 
-class FrwophPdo implements FrwophPdoInterface
+class ePdo
 {
 
     /**

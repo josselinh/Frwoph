@@ -1,6 +1,6 @@
 <?php
 
-namespace Frwoph\Vendor\Frwoph\Exceptions;
+namespace Frwoph\Vendor\Frwoph\Router;
 
 use Exception;
 
